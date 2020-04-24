@@ -37,8 +37,8 @@ pipeline {
               cat ${SECRETKEYFILE} > ssh_key
               chmod 400 ssh_key
               scp -i ssh_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -q target/WebApp.war ${params.TomcatHost}:/tmp/
-	      ssh -i ssh_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${params.TomcatHost} sudo mv /tmp/WebApp.war /opt/tomcat/webapps/
-              ssh -i ssh_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${params.TomcatHost} sudo /opt/tomcat/bin/startup.sh
+	      ssh -i ssh_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@${params.TomcatHost} sudo mv /tmp/WebApp.war /opt/tomcat/webapps/
+              ssh -i ssh_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@${params.TomcatHost} sudo /opt/tomcat/bin/startup.sh
               """
             }
         }
